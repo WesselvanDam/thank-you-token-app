@@ -28,7 +28,7 @@ jobs:
         run: dart run build_runner build
 
       - name: Build web app
-        run: flutter build web
+        run: flutter build web --base-href=/thank-you-token-app/
 
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3

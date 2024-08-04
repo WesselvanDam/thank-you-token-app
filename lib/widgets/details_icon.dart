@@ -9,12 +9,13 @@ class DetailsIcon extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final empty = (info.name == null || info.name!.isEmpty);
     if (info.isFrom) {
-      return info.name == null
+      return empty
           ? const Icon(Icons.circle_outlined, color: CustomColors.tytYellow)
           : const Icon(Icons.call_received, color: CustomColors.tytBlue);
     } else {
-      return info.name == null
+      return empty
           ? const Icon(Icons.question_mark, color: CustomColors.tytRed)
           : const Icon(Icons.call_made, color: CustomColors.tytGreen);
     }

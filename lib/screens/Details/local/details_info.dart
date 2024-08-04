@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/intl.dart';
 import 'package:thank_you_token/models/token_metadata.dart';
@@ -51,7 +52,7 @@ class DetailsInfo extends ConsumerWidget {
             title: ClipRRect(
               borderRadius: BorderRadius.circular(8),
               child: TextField(
-                maxLength: 50,
+                inputFormatters: [LengthLimitingTextInputFormatter(50)],
                 controller: TextEditingController(text: info.name),
                 onChanged: (value) {
                   ref.read(tokenEditProvider.notifier).updateInfo(

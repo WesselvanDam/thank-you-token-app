@@ -9,12 +9,12 @@ class TokenEdit extends _$TokenEdit {
   @override
   Token? build() => null;
 
-  void setToken(Token? token) {
-    state = token;
-  }
+  void setToken(Token? token) => state = token;
 
   void updateInfo(
-      bool isFrom, TokenPartialInfo Function(TokenPartialInfo info) update) {
+    bool isFrom,
+    TokenPartialInfo Function(TokenPartialInfo info) update,
+  ) {
     state = isFrom
         ? state!.copyWith(fromInfo: update(state!.fromInfo))
         : state!.copyWith(toInfo: update(state!.toInfo));

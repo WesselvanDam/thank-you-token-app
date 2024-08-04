@@ -8,10 +8,11 @@ class DetailsName extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    if (info.isFrom) {
-      return info.name == null ? const Text('Made by you') : Text(info.name!);
+    final empty = (info.name == null || info.name!.isEmpty);
+    if (empty) {
+      return info.isFrom ? const Text('Made by you') : const Text('Not yet given');
     } else {
-      return info.name == null ? const Text('Not yet given') : Text(info.name!);
+      return Text(info.name!);
     }
   }
 }

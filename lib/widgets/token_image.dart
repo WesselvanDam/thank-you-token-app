@@ -18,23 +18,20 @@ class TokenImage extends StatelessWidget {
         color: Theme.of(context).colorScheme.errorContainer,
         width: double.infinity,
         child: Image.network(token.thumbnailLink.replaceAll('=s220', '=s720'),
-        gaplessPlayback: true,
+            gaplessPlayback: true,
             width: double.infinity,
             fit: BoxFit.cover,
             errorBuilder: (context, error, stackTrace) => Center(
-              child: Padding(
-                padding: const EdgeInsets.all(24.0),
-                child: Image.asset(
-                      'assets/images/glyph_white.png',
-                      width: 80,
-                      height: 80,
-                      color: Theme.of(context)
-                          .colorScheme
-                          .onErrorContainer
-                          .withOpacity(0.2),
-                    ),
-              ),
-            )),
+                  child: Image.asset(
+                    'assets/images/glyph_white.png',
+                    width: 80,
+                    height: 80,
+                    color: Theme.of(context)
+                        .colorScheme
+                        .onErrorContainer
+                        .withOpacity(0.2),
+                  ),
+                )),
       ),
     );
   }

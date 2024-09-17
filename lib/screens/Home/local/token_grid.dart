@@ -32,8 +32,8 @@ class TokenGrid extends ConsumerWidget {
         interval: const Duration(milliseconds: 100),
         effects: [const FadeEffect()],
         children: [
-          for (final token in tokens.value!) TokenCard(token: token),
           const AddTokenCard(),
+          for (final token in tokens.value!) TokenCard(token: token),
         ],
       ),
     );

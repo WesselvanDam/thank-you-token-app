@@ -61,10 +61,12 @@ class DetailsInfo extends ConsumerWidget {
                       );
                 },
                 decoration: const InputDecoration(
-                  contentPadding: EdgeInsets.symmetric(horizontal: 8),
+                  contentPadding:
+                      EdgeInsets.symmetric(horizontal: 8, vertical: 4),
                   border: InputBorder.none,
                   hintText: 'Name',
                   filled: true,
+                  isDense: true,
                 ),
               ),
             ),
@@ -72,8 +74,8 @@ class DetailsInfo extends ConsumerWidget {
               padding: const EdgeInsets.only(top: 4.0),
               child: Align(
                 alignment: Alignment.topLeft,
-                child: OutlinedButton(
-                  onPressed: () async {
+                child: GestureDetector(
+                  onTap: () async {
                     final date = await showDatePicker(
                       context: context,
                       initialDate: info.date ?? DateTime.now(),
@@ -88,12 +90,19 @@ class DetailsInfo extends ConsumerWidget {
                     }
                   },
                   child: Consumer(builder: (context, ref, child) {
-                    return Text(ref.watch(tokenEditProvider.select((value) {
-                      final date = (info.isFrom ? value?.fromInfo : value?.toInfo)!.date;
-                      return date == null
+                    return Text(
+                      ref.watch(tokenEditProvider.select((value) {
+                        final date =
+                            (info.isFrom ? value?.fromInfo : value?.toInfo)!
+                                .date;
+                        return date == null
                             ? 'Select a date'
                             : DateFormat.yMMMd().format(value!.fromInfo.date!);
-                    })));
+                      })),
+                      style: TextStyle(
+                        color: Theme.of(context).primaryColor,
+                      ),
+                    );
                   }),
                 ),
               ),
@@ -113,6 +122,7 @@ class DetailsInfo extends ConsumerWidget {
                         (info) => info.copyWith(message: value),
                       );
                 },
+                style: Theme.of(context).textTheme.bodyMedium,
                 decoration: const InputDecoration(
                   contentPadding: EdgeInsets.all(8),
                   border: InputBorder.none,

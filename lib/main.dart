@@ -23,11 +23,32 @@ class MyApp extends ConsumerWidget {
     return MaterialApp.router(
       debugShowCheckedModeBanner: false,
       title: 'Thank You Token App',
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: CustomColors.tytBlue),
-        useMaterial3: true,
-      ),
+      theme: themeData(context),
       routerConfig: router,
     );
   }
+}
+
+extension CopyWithFamily on TextStyle {
+  TextStyle copyWithFamily(String family) => copyWith(fontFamily: family);
+}
+
+ThemeData themeData(BuildContext context) {
+  TextTheme textTheme = Theme.of(context).textTheme.apply(
+    fontFamily: 'AtkinsonHyperlegible',
+  );
+  textTheme = textTheme.copyWith(
+    headlineSmall: textTheme.headlineSmall?.copyWithFamily('HurmeGeometricSans'),
+    headlineMedium: textTheme.headlineMedium?.copyWithFamily('HurmeGeometricSans'),
+    headlineLarge: textTheme.headlineLarge?.copyWithFamily('HurmeGeometricSans'),
+    displaySmall: textTheme.displaySmall?.copyWithFamily('HurmeGeometricSans'),
+    displayMedium: textTheme.displayMedium?.copyWithFamily('HurmeGeometricSans'),
+    displayLarge: textTheme.displayLarge?.copyWithFamily('HurmeGeometricSans'),
+  );
+  
+  return ThemeData(
+    useMaterial3: true,
+    colorScheme: ColorScheme.fromSeed(seedColor: CustomColors.tytBlue),
+    textTheme: textTheme,
+  );
 }

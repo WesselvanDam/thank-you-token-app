@@ -41,18 +41,21 @@ class DetailsScreen extends ConsumerWidget {
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: [
-        TokenImage(token, borderRadius: 24),
+        AspectRatio(
+          aspectRatio: 16 / 9,
+          child: TokenImage(token, borderRadius: 24),
+        ),
         ButtonBar(
           alignment: MainAxisAlignment.center,
           children: [
             if (isEditing)
-              ElevatedButton.icon(
+              FilledButton.icon(
                 icon: const Icon(Icons.save),
                 label: const Text('Save'),
                 onPressed: () => _handleSave(ref),
               )
             else
-              ElevatedButton.icon(
+              FilledButton.tonalIcon(
                 icon: const Icon(Icons.edit),
                 label: const Text('Edit'),
                 onPressed: () => _handleEdit(ref, token),

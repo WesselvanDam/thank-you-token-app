@@ -10,8 +10,22 @@ part 'routes.g.dart';
 final GlobalKey<NavigatorState> rootNavigatorKey = GlobalKey<NavigatorState>();
 final GlobalKey<NavigatorState> shellNavigatorKey = GlobalKey<NavigatorState>();
 
+// Create a mixin that overrides buildPage for a fade transition
+mixin FadeRoute on GoRouteData {
+  @override
+  Page buildPage(BuildContext context, GoRouterState state) {
+    return CustomTransitionPage(
+      key: state.pageKey,
+      transitionsBuilder: (context, animation, secondaryAnimation, child) {
+        return FadeTransition(opacity: animation, child: child);
+      },
+      child: build(context, state),
+    );
+  }
+}
+
 @TypedGoRoute<LoginRoute>(path: '/login')
-class LoginRoute extends GoRouteData {
+class LoginRoute extends GoRouteData with FadeRoute {
   LoginRoute();
 
   @override

@@ -40,7 +40,8 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                 'assets/images/glyph_color.png',
               ),
             ),
-            title: Text('Welcome, ${user?.displayName ?? 'Guest'}'),
+            title: Text(
+                'Welcome, ${user?.displayName?.split(' ').first ?? 'Guest'}'),
             actions: [
               IconButton(
                 tooltip: "Sign out",

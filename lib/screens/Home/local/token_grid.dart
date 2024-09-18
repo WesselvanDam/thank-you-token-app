@@ -12,8 +12,18 @@ class TokenGrid extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final tokens = ref.watch(tokensProvider);
     if (tokens.isLoading || tokens.value == null) {
-      return const Center(
-        child: CircularProgressIndicator(),
+      return Center(
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            const CircularProgressIndicator(),
+            const SizedBox(height: 8),
+            Text(
+              'If this takes too long, try refreshing by tapping the refresh icon. You may have blocked automatic popups.',
+              style: Theme.of(context).textTheme.labelLarge,
+            ).animate().fadeIn(delay: const Duration(seconds: 2)),
+          ],
+        ),
       );
     }
     if (tokens.hasError) {

@@ -16,7 +16,7 @@ class Tokens extends _$Tokens {
   Future<bool> addToken(XFile image) async {
     return DriveServiceApi()
         .addToken(image)
-        .then((token) => update((tokens) => [...tokens, token]))
+        .then((token) => update((tokens) => [token, ...tokens]))
         .then((_) => true)
         .catchError((error) => false);
   }

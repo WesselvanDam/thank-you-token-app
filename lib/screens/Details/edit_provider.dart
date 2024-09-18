@@ -16,7 +16,7 @@ class TokenEdit extends _$TokenEdit {
     TokenPartialInfo Function(TokenPartialInfo info) update,
   ) {
     state = isFrom
-        ? state!.copyWith(fromInfo: update(state!.fromInfo))
-        : state!.copyWith(toInfo: update(state!.toInfo));
+        ? state?.copyWith(fromInfo: update(state!.fromInfo))
+        : state?.copyWith(toInfo: update(state!.toInfo));
   }
 }

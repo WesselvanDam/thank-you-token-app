@@ -109,7 +109,7 @@ class LoginScreen extends ConsumerWidget {
             const Padding(
               padding: EdgeInsets.all(24),
               child: Text(
-                'Use this app to save the stories behind your tokens.',
+                'You can use this app to save the stories behind your tokens. Sign in with your Google account to get started.',
                 textAlign: TextAlign.center,
               ),
             ),

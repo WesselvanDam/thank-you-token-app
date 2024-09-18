@@ -93,8 +93,8 @@ class DetailsInfo extends ConsumerWidget {
                     return Text(
                       ref.watch(tokenEditProvider.select((value) {
                         final date =
-                            (info.isFrom ? value?.fromInfo : value?.toInfo)!
-                                .date;
+                            (info.isFrom ? value?.fromInfo : value?.toInfo)
+                                ?.date;
                         return date == null
                             ? 'Select a date'
                             : DateFormat.yMMMd().format(value!.fromInfo.date!);

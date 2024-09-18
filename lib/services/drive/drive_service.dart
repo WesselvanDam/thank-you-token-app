@@ -12,6 +12,15 @@ const fields = 'id, name, description, properties, thumbnailLink, createdTime';
 class DriveServiceApi {
   DriveServiceApi();
 
+  Future<bool> isAppAuthorised() async {
+    final isAuthorised = await googleSignIn.canAccessScopes(scopes);
+    if (isAuthorised) return true;
+    return googleSignIn.requestScopes(scopes).then((isAuthorisedNow) {
+      debugPrint("Request result: $isAuthorisedNow");
+      return isAuthorisedNow;
+    });
+  }
+
   Future<auth.AuthClient> getClient() async {
     final client = await googleSignIn.authenticatedClient();
     if (client == null) {
@@ -21,10 +30,13 @@ class DriveServiceApi {
   }
 
   Future<List<Token>> fetchTokens() async {
-    final isAuthorised = await googleSignIn.canAccessScopes(scopes);
+    final isAuthorised = await isAppAuthorised();
+    debugPrint("Is Authorised now: $isAuthorised");
     if (!isAuthorised) {
-      await googleSignIn.requestScopes(scopes);
+      throw Exception(
+          'You have not authorised the app to access your Google Drive');
     }
+
     final client = await getClient();
     final api = DriveApi(client);
 

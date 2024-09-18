@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <!--
+  <head>
+    <!--
     If you are serving your web app in a path other than the root, change the
     href value below to reflect the base path you are serving from.
 
@@ -14,27 +14,183 @@
     This is a placeholder for base href that will be replaced by the value of
     the `--base-href` argument provided to `flutter build`.
   -->
-  <base href="$FLUTTER_BASE_HREF">
+    <base href="$FLUTTER_BASE_HREF" />
 
-  <meta name="google-signin-client_id" content="261520608365-72hv2nusnvam645c2dqp4gd8ti1fs7vi.apps.googleusercontent.com.apps.googleusercontent.com">
+    <meta
+      name="google-signin-client_id"
+      content="261520608365-72hv2nusnvam645c2dqp4gd8ti1fs7vi.apps.googleusercontent.com.apps.googleusercontent.com" />
 
-  <meta charset="UTF-8">
-  <meta content="IE=Edge" http-equiv="X-UA-Compatible">
-  <meta name="description" content="A simple app for saving the stories behind your Thank You Tokens.">
+    <meta charset="UTF-8" />
+    <meta content="IE=Edge" http-equiv="X-UA-Compatible" />
+    <meta
+      name="description"
+      content="A simple app for saving the stories behind your Thank You Tokens." />
 
-  <!-- iOS meta tags & icons -->
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black">
-  <meta name="apple-mobile-web-app-title" content="Thank You Token">
-  <link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+    <!-- iOS meta tags & icons -->
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    <meta name="apple-mobile-web-app-title" content="Thank You Token" />
+    <link rel="apple-touch-icon" href="icons/apple-touch-icon.png" />
 
-  <!-- Favicon -->
-  <link rel="icon" type="image/png" href="favicon.ico"/>
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="favicon.ico" />
 
-  <title>Thank You Token</title>
-  <link rel="manifest" href="manifest.json">
-</head>
-<body>
-  <script src="flutter_bootstrap.js" async></script>
-</body>
+    <title>Thank You Token</title>
+    <link rel="manifest" href="manifest.json" />
+
+    <!-- Loading animation -->
+    <style>
+      /* Center the loading spinner. it's width and height are 10% of the largest dimension */
+      #loading-spinner {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 15vmin;
+        height: 15vmin;
+      }
+      /* Hide the loading spinner when the app is ready */
+      body.loaded #loading-spinner {
+        display: none;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- SVG Loading Spinner -->
+    <div id="loading-spinner">
+      <svg
+        id="eptDh0Qv72u1"
+        xmlns="http://www.w3.org/2000/svg"
+        xmlns:xlink="http://www.w3.org/1999/xlink"
+        viewBox="0 0 438.32 433.9"
+        shape-rendering="geometricPrecision"
+        text-rendering="geometricPrecision"
+        project-id="2b4e9b1660fc4c25b070ec160b3043e2"
+        export-id="6337035d9e324018b063ea987e3c1306"
+        cached="false">
+        <style>
+          #eptDh0Qv72u3_to {
+            animation: eptDh0Qv72u3_to__to 4000ms linear infinite normal
+              forwards;
+          }
+          @keyframes eptDh0Qv72u3_to__to {
+            0% {
+              transform: translate(102.969998px, 103.309998px);
+              animation-timing-function: cubic-bezier(0.77, 0, 0.175, 1);
+            }
+            25% {
+              transform: translate(335.399998px, 103.309998px);
+              animation-timing-function: cubic-bezier(0.77, 0, 0.175, 1);
+            }
+            50% {
+              transform: translate(335.399998px, 330.15999px);
+              animation-timing-function: cubic-bezier(0.77, 0, 0.175, 1);
+            }
+            75% {
+              transform: translate(102.930002px, 330.15999px);
+              animation-timing-function: cubic-bezier(0.77, 0, 0.175, 1);
+            }
+            100% {
+              transform: translate(102.969998px, 103.309998px);
+            }
+          }
+          #eptDh0Qv72u4_to {
+            animation: eptDh0Qv72u4_to__to 4000ms linear infinite normal
+              forwards;
+          }
+          @keyframes eptDh0Qv72u4_to__to {
+            0% {
+              transform: translate(102.970001px, 330.540001px);
+              animation-timing-function: cubic-bezier(0.77, 0, 0.175, 1);
+            }
+            25% {
+              transform: translate(102.970001px, 102.71354px);
+              animation-timing-function: cubic-bezier(0.77, 0, 0.175, 1);
+            }
+            50% {
+              transform: translate(335.301505px, 102.71354px);
+              animation-timing-function: cubic-bezier(0.77, 0, 0.175, 1);
+            }
+            75% {
+              transform: translate(335.301505px, 330.109993px);
+              animation-timing-function: cubic-bezier(0.77, 0, 0.175, 1);
+            }
+            100% {
+              transform: translate(102.970001px, 330.540001px);
+            }
+          }
+          #eptDh0Qv72u5_to {
+            animation: eptDh0Qv72u5_to__to 4000ms linear infinite normal
+              forwards;
+          }
+          @keyframes eptDh0Qv72u5_to__to {
+            0% {
+              transform: translate(335.405006px, 330.544998px);
+              animation-timing-function: cubic-bezier(0.77, 0, 0.175, 1);
+            }
+            25% {
+              transform: translate(102.925006px, 330.544998px);
+              animation-timing-function: cubic-bezier(0.77, 0, 0.175, 1);
+            }
+            50% {
+              transform: translate(102.925006px, 103.148545px);
+              animation-timing-function: cubic-bezier(0.77, 0, 0.175, 1);
+            }
+            75% {
+              transform: translate(335.256506px, 103.148545px);
+              animation-timing-function: cubic-bezier(0.77, 0, 0.175, 1);
+            }
+            100% {
+              transform: translate(335.405006px, 330.544998px);
+            }
+          }
+        </style>
+        <g>
+          <g id="eptDh0Qv72u3_to" transform="translate(102.969998,103.309998)">
+            <polygon
+              points="102.97,0 0.05,206.62 205.89,206.62 102.97,0"
+              transform="translate(-102.969998,-103.309998)"
+              fill="#eb5353"
+              stroke-width="0" />
+          </g>
+          <g id="eptDh0Qv72u4_to" transform="translate(102.970001,330.540001)">
+            <path
+              d="M175.33,403.55c-20.4,20.23-44.87,30.35-73.4,30.35s-52.22-10.12-72.1-30.35C9.94,383.32,0,359.03,0,330.67s9.94-53.78,29.83-73.66s44.09-29.83,72.62-29.83s52.91,10.07,73.14,30.22c20.23,20.14,30.35,44.48,30.35,73.01s-10.2,52.91-30.61,73.14Z"
+              transform="translate(-102.970001,-330.540001)"
+              fill="#187498"
+              stroke-width="0" />
+          </g>
+          <g id="eptDh0Qv72u5_to" transform="translate(335.405006,330.544998)">
+            <rect
+              width="205.85"
+              height="205.85"
+              rx="0"
+              ry="0"
+              transform="rotate(90) translate(-102.925006,-102.924998)"
+              fill="#36ae7c"
+              stroke-width="0" />
+          </g>
+        </g>
+        <rect
+          style="mix-blend-mode: multiply"
+          width="438.32"
+          height="216.95"
+          rx="0"
+          ry="0"
+          transform="translate(0 216.95)"
+          opacity="0.8"
+          fill="url(#eptDh0Qv72u6-fill)"
+          stroke-width="0" />
+      </svg>
+    </div>
+
+    <script>
+      // Hide the loading spinner once the Flutter app is ready
+      window.addEventListener("flutter-first-frame", function () {
+        document.body.classList.add("loaded");
+      });
+    </script>
+
+    <script src="flutter_bootstrap.js" async></script>
+  </body>
 </html>

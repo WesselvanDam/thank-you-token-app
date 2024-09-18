@@ -12,7 +12,10 @@ final routerProvider = StateProvider<GoRouter>((ref) {
     ..onDispose(isLoggedIn.dispose)
     ..listen(
       userProvider,
-      (_, next) => isLoggedIn.value = next.valueOrNull != null,
+      (_, next) {
+        debugPrint("Next: $next");
+        isLoggedIn.value = next.valueOrNull != null;
+      },
     );
 
   return GoRouter(

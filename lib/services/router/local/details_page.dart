@@ -53,8 +53,7 @@ class DetailsPage<T> extends Page<T> {
                     borderRadius: const BorderRadius.all(Radius.circular(24)),
                     child: ColoredBox(
                       color: Theme.of(context).scaffoldBackgroundColor,
-                      child:
-                          SingleChildScrollView(child: Material(child: child)),
+                      child: child,
                     ),
                   ),
                 ),

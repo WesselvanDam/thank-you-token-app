@@ -36,7 +36,10 @@ class DetailsInfo extends ConsumerWidget {
         ),
         Padding(
           padding: const EdgeInsets.all(8.0),
-          child: Text(info.message ?? 'No description added'),
+          child: Text(
+            info.message ?? 'No description added',
+            style: Theme.of(context).textTheme.bodyMedium,
+          ),
         )
       ],
     );

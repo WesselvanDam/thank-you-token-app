@@ -18,7 +18,10 @@ class Tokens extends _$Tokens {
         .addToken(image)
         .then((token) => update((tokens) => [token, ...tokens]))
         .then((_) => true)
-        .catchError((error) => false);
+        .catchError((error) {
+      debugPrint('Error adding token: $error');
+      return false;
+    });
   }
 
   Future<bool> updateToken(Token token) async {
@@ -26,18 +29,22 @@ class Tokens extends _$Tokens {
       final index = tokens.indexWhere((t) => t.id == token.id);
       tokens[index] = token;
       return tokens;
-    }).then((_) => DriveServiceApi().updateToken(token)).then((updatedToken) {
-      debugPrint('Updated Token equals Token: ${updatedToken == token}');
-      debugPrint("Updated Token: $updatedToken");
-      debugPrint("Token: $token");
-      return updatedToken == token;
-    }).catchError((error) => false);
+    })
+        .then((_) => DriveServiceApi().updateToken(token))
+        .then((updatedToken) => updatedToken == token)
+        .catchError((error) {
+      debugPrint('Error updating token: $error');
+      return false;
+    });
   }
 
   Future<bool> deleteToken(Token token) async {
     return update((tokens) => tokens..remove(token))
         .then((_) => DriveServiceApi().deleteToken(token))
         .then((_) => true)
-        .catchError((error) => false);
+        .catchError((error) {
+      debugPrint('Error deleting token: $error');
+      return false;
+    });
   }
 }

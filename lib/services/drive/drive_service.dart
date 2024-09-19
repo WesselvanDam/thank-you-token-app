@@ -16,7 +16,6 @@ class DriveServiceApi {
     final isAuthorised = await googleSignIn.canAccessScopes(scopes);
     if (isAuthorised) return true;
     return googleSignIn.requestScopes(scopes).then((isAuthorisedNow) {
-      debugPrint("Request result: $isAuthorisedNow");
       return isAuthorisedNow;
     });
   }
@@ -31,10 +30,10 @@ class DriveServiceApi {
 
   Future<List<Token>> fetchTokens() async {
     final isAuthorised = await isAppAuthorised();
-    debugPrint("Is Authorised now: $isAuthorised");
     if (!isAuthorised) {
       throw Exception(
-          'You have not authorised the app to access your Google Drive');
+        'You have not authorised the app to access your Google Drive',
+      );
     }
 
     final client = await getClient();
@@ -71,7 +70,6 @@ class DriveServiceApi {
   Future<Token> addToken(XFile image) async {
     final client = await getClient();
     final api = DriveApi(client);
-    debugPrint("Mime Type: ${image.mimeType}");
     final name = '${DateTime.now().millisecondsSinceEpoch}';
     return api.files
         .create(
@@ -85,7 +83,6 @@ class DriveServiceApi {
       uploadOptions: ResumableUploadOptions(),
     )
         .then((file) {
-      debugPrint("Upload success: $file");
       return Token.fromFile(file);
     }).catchError((error) {
       debugPrint("Error: $error");
@@ -99,9 +96,7 @@ class DriveServiceApi {
     final file = File();
     file.properties = token.propertiesToJson();
     file.description = token.encodeDescription();
-    debugPrint("File properties: ${file.properties}");
     return api.files.update(file, token.id, $fields: fields).then((file) {
-      debugPrint("Updated File: $file");
       return Token.fromFile(file);
     }).catchError((error) {
       debugPrint("Error: $error");

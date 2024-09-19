@@ -12,10 +12,7 @@ final routerProvider = StateProvider<GoRouter>((ref) {
     ..onDispose(isLoggedIn.dispose)
     ..listen(
       userProvider,
-      (_, next) {
-        debugPrint("Next: $next");
-        isLoggedIn.value = next.valueOrNull != null;
-      },
+      (_, next) => isLoggedIn.value = next.valueOrNull != null,
     );
 
   return GoRouter(
@@ -24,8 +21,6 @@ final routerProvider = StateProvider<GoRouter>((ref) {
         isLoggedIn.value ? HomeRoute().location : LoginRoute().location,
     routes: $appRoutes,
     redirect: (context, state) {
-      debugPrint(
-          'Redirecting to: ${state.fullPath} \t\t\t isLoggedIn: ${isLoggedIn.value}');
       final onLogin = state.fullPath == LoginRoute().location;
       if (onLogin && isLoggedIn.value) {
         return HomeRoute().location;

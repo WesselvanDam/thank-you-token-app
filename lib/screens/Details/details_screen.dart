@@ -6,6 +6,7 @@ import 'package:thank_you_token/providers/token_provider.dart';
 import 'package:thank_you_token/screens/Details/edit_provider.dart';
 import 'package:thank_you_token/screens/Details/local/details_info.dart';
 import 'package:thank_you_token/utils/extensions.dart';
+import 'package:thank_you_token/widgets/adaptive_scroll.dart';
 import 'package:thank_you_token/widgets/token_image.dart';
 
 class DetailsScreen extends ConsumerWidget {
@@ -15,8 +16,10 @@ class DetailsScreen extends ConsumerWidget {
     ref.read(tokenEditProvider.notifier).setToken(token);
   }
 
-  void _handleSave(WidgetRef ref) {
-    ref.read(tokensProvider.notifier).updateToken(ref.read(tokenEditProvider)!);
+  void _handleSave(WidgetRef ref, Token token) {
+    if (ref.read(tokenEditProvider) != token) {
+      ref.read(tokensProvider.notifier).updateToken(ref.read(tokenEditProvider)!);
+    }
     ref.read(tokenEditProvider.notifier).setToken(null);
   }
 
@@ -38,43 +41,47 @@ class DetailsScreen extends ConsumerWidget {
       return const SizedBox();
     }
 
-    return Column(
-      mainAxisSize: MainAxisSize.min,
-      children: [
-        AspectRatio(
-          aspectRatio: 16 / 9,
-          child: TokenImage(token, borderRadius: 24),
-        ),
-        ButtonBar(
-          alignment: MainAxisAlignment.center,
+    return AdaptiveScrollView(slivers: [
+      SliverToBoxAdapter(
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
           children: [
-            if (isEditing)
-              FilledButton.icon(
-                icon: const Icon(Icons.save),
-                label: const Text('Save'),
-                onPressed: () => _handleSave(ref),
-              )
-            else
-              FilledButton.tonalIcon(
-                icon: const Icon(Icons.edit),
-                label: const Text('Edit'),
-                onPressed: () => _handleEdit(ref, token),
-              ),
-            OutlinedButton.icon(
-              icon: const Icon(Icons.delete),
-              label: const Text('Delete'),
-              onPressed: () => _handleDelete(context, ref, token),
+            AspectRatio(
+              aspectRatio: 16 / 9,
+              child: TokenImage(token, borderRadius: 24),
+            ),
+            Column(
+              children: [
+                DetailsInfo(token.fromInfo),
+                const Divider(indent: 24, endIndent: 24),
+                DetailsInfo(token.toInfo),
+              ],
+            ),
+            ButtonBar(
+              alignment: MainAxisAlignment.end,
+              children: [
+                OutlinedButton.icon(
+                  icon: const Icon(Icons.delete),
+                  label: const Text('Delete'),
+                  onPressed: () => _handleDelete(context, ref, token),
+                ),
+                if (isEditing)
+                  FilledButton.icon(
+                    icon: const Icon(Icons.save),
+                    label: const Text('Save'),
+                    onPressed: () => _handleSave(ref, token),
+                  )
+                else
+                  FilledButton.tonalIcon(
+                    icon: const Icon(Icons.edit),
+                    label: const Text('Edit'),
+                    onPressed: () => _handleEdit(ref, token),
+                  ),
+              ],
             ),
           ],
         ),
-        Column(
-          children: [
-            DetailsInfo(token.fromInfo),
-            const Divider(indent: 24, endIndent: 24),
-            DetailsInfo(token.toInfo),
-          ],
-        ),
-      ],
-    );
+      ),
+    ]);
   }
 }

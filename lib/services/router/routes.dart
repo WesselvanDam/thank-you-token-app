@@ -24,6 +24,11 @@ mixin FadeRoute on GoRouteData {
   }
 }
 
+mixin MaterialPage on GoRouteData {
+  // Wrap the buildPage method to return a MaterialPage. We cannot override
+  // buildPage because it needs to be customised by the routes themselves.
+}
+
 @TypedGoRoute<LoginRoute>(path: '/login')
 class LoginRoute extends GoRouteData with FadeRoute {
   LoginRoute();
@@ -42,7 +47,7 @@ class HomeRoute extends GoRouteData {
 
   @override
   Widget build(BuildContext context, GoRouterState state) {
-    return const HomeScreen();
+    return const Material(child: HomeScreen());
   }
 }
 
@@ -53,6 +58,6 @@ class TokenDetailsRoute extends GoRouteData {
 
   @override
   Page buildPage(BuildContext context, GoRouterState state) {
-    return const DetailsPage(child: DetailsScreen());
+    return const DetailsPage(child: Material(child: DetailsScreen()));
   }
 }

@@ -102,7 +102,7 @@ class DetailsInfo extends ConsumerWidget {
                                 ?.date;
                         return date == null
                             ? 'Select a date'
-                            : DateFormat.yMMMd().format(value!.fromInfo.date!);
+                            : DateFormat.yMMMd().format(date);
                       })),
                       style: TextStyle(
                         color: Theme.of(context).primaryColor,

@@ -1,5 +1,3 @@
-import 'dart:async';
-
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:thank_you_token/screens/Details/details_screen.dart';
@@ -57,16 +55,6 @@ class TokenDetailsRoute extends GoRouteData {
   TokenDetailsRoute({required this.id});
 
   final String id;
-
-  // Redirect to the home page if the token is not found
-  @override
-  FutureOr<String?> redirect(BuildContext context, GoRouterState state) {
-    if (id.isEmpty ) {
-      return HomeRoute().location;
-    }
-    return null;
-  }
-
 
   @override
   Page buildPage(BuildContext context, GoRouterState state) {

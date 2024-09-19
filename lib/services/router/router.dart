@@ -4,6 +4,7 @@ import 'package:go_router/go_router.dart';
 import 'package:thank_you_token/main.dart';
 import 'package:thank_you_token/providers/user_provider.dart';
 import 'package:thank_you_token/services/router/routes.dart';
+import 'package:thank_you_token/utils/extensions.dart';
 
 final routerProvider = StateProvider<GoRouter>((ref) {
   final isLoggedIn = ValueNotifier<bool>(initialLogIn);
@@ -28,6 +29,9 @@ final routerProvider = StateProvider<GoRouter>((ref) {
       final onPathRequiringAuth = state.fullPath != LoginRoute().location;
       if (onPathRequiringAuth && !isLoggedIn.value) {
         return LoginRoute().location;
+      }
+      if (state.fullPath?.isEmpty ?? true) {
+        return HomeRoute().location;
       }
       return null;
     },

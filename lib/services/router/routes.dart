@@ -58,6 +58,6 @@ class TokenDetailsRoute extends GoRouteData {
 
   @override
   Page buildPage(BuildContext context, GoRouterState state) {
-    return const DetailsPage(child: Material(child: DetailsScreen()));
+    return const DetailsPage(child: DetailsScreen());
   }
 }

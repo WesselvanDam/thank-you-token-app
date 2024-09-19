@@ -19,7 +19,10 @@ class HomeScreen extends ConsumerWidget {
         SliverAppBar.large(
           leading: Padding(
             padding: const EdgeInsets.all(8.0),
-            child: Image.asset('assets/images/glyph_color.png'),
+            child: Image.asset(
+              'assets/images/glyph_color.png',
+              gaplessPlayback: true,
+            ),
           ),
           title: Text(
             'Welcome, ${user?.displayName?.split(' ').first ?? 'Guest'}',

@@ -38,12 +38,14 @@ class _AdaptiveScrollViewState extends State<AdaptiveScrollView> {
                 controller: _scrollController,
                 child: CustomScrollView(
                   controller: _scrollController,
+                  shrinkWrap: true,
                   physics: const NeverScrollableScrollPhysics(),
                   slivers: widget.slivers,
                 ),
               )
             : CustomScrollView(
                 controller: _scrollController,
+                shrinkWrap: true,
                 slivers: widget.slivers,
               ),
       ),

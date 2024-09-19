@@ -21,6 +21,7 @@ class DetailsInfo extends ConsumerWidget {
 
   Widget showInfo(BuildContext context, WidgetRef ref) {
     return Column(
+      mainAxisSize: MainAxisSize.min,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         ListTile(
@@ -48,6 +49,7 @@ class DetailsInfo extends ConsumerWidget {
   Widget editInfo(BuildContext context, WidgetRef ref) {
     return FocusTraversalGroup(
       child: Column(
+        mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           ListTile(

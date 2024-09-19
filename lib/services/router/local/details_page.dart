@@ -18,9 +18,15 @@ class DetailsPage<T> extends Page<T> {
               minChildSize: 0.5,
               maxChildSize: 1,
               expand: false,
-              builder: (context, scrollController) => SingleChildScrollView(
-                    controller: scrollController,
-                    child: child,
+              builder: (context, scrollController) => ClipRRect(
+                    borderRadius: const BorderRadius.only(
+                      topLeft: Radius.circular(24),
+                      topRight: Radius.circular(24),
+                    ),
+                    child: SingleChildScrollView(
+                      controller: scrollController,
+                      child: child,
+                    ),
                   ));
         },
       );
@@ -53,7 +59,7 @@ class DetailsPage<T> extends Page<T> {
                     borderRadius: const BorderRadius.all(Radius.circular(24)),
                     child: ColoredBox(
                       color: Theme.of(context).scaffoldBackgroundColor,
-                      child: child,
+                      child: Material(child: child),
                     ),
                   ),
                 ),

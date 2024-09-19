@@ -30,9 +30,6 @@ final routerProvider = StateProvider<GoRouter>((ref) {
       if (onPathRequiringAuth && !isLoggedIn.value) {
         return LoginRoute().location;
       }
-      if (state.fullPath?.isEmpty ?? true) {
-        return HomeRoute().location;
-      }
       return null;
     },
     refreshListenable: isLoggedIn,

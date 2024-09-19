@@ -24,22 +24,29 @@ class _AdaptiveScrollViewState extends State<AdaptiveScrollView> {
   @override
   Widget build(BuildContext context) {
     return Listener(
-      onPointerSignal: (event) => event.kind != _pointerDeviceKind
-          ? setState(() => _pointerDeviceKind = event.kind)
-          : null,
-      child: _pointerDeviceKind == PointerDeviceKind.mouse
-          ? WebSmoothScroll(
-              controller: _scrollController,
-              child: CustomScrollView(
+      onPointerSignal: (event) {
+        event.kind != _pointerDeviceKind
+            ? setState(() => _pointerDeviceKind = event.kind)
+            : null;
+      },
+      child: GestureDetector(
+        onTapDown: (_) => _pointerDeviceKind == PointerDeviceKind.mouse
+            ? setState(() => _pointerDeviceKind = PointerDeviceKind.touch)
+            : null,
+        child: _pointerDeviceKind == PointerDeviceKind.mouse
+            ? WebSmoothScroll(
                 controller: _scrollController,
-                physics: const NeverScrollableScrollPhysics(),
+                child: CustomScrollView(
+                  controller: _scrollController,
+                  physics: const NeverScrollableScrollPhysics(),
+                  slivers: widget.slivers,
+                ),
+              )
+            : CustomScrollView(
+                controller: _scrollController,
                 slivers: widget.slivers,
               ),
-            )
-          : CustomScrollView(
-              controller: _scrollController,
-              slivers: widget.slivers,
-            ),
+      ),
     );
   }
 }

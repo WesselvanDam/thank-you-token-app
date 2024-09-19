@@ -35,20 +35,21 @@ class LoginScreen extends ConsumerWidget {
           if (isWideScreen) {
             double alignmentX = calculateAlignmentX(constraints, contentWidth);
             return Center(
-              child: buildWideScreenLayout(alignmentX, contentWidth),
+              child: buildWideScreenLayout(context, alignmentX, contentWidth),
             );
           }
-          return buildColumnLayout();
+          return buildColumnLayout(context);
         },
       ),
     );
   }
 
-  Widget buildColumnLayout() {
-    return content();
+  Widget buildColumnLayout(BuildContext context) {
+    return content(context);
   }
 
-  Widget buildWideScreenLayout(double alignmentX, double contentWidth) {
+  Widget buildWideScreenLayout(
+      BuildContext context, double alignmentX, double contentWidth) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
@@ -64,13 +65,13 @@ class LoginScreen extends ConsumerWidget {
         ),
         SizedBox(
           width: contentWidth,
-          child: content(),
+          child: content(context),
         ),
       ],
     );
   }
 
-  Widget content() {
+  Widget content(BuildContext context) {
     return SingleChildScrollView(
       child: Padding(
         padding: const EdgeInsets.all(12.0),
@@ -78,7 +79,7 @@ class LoginScreen extends ConsumerWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Padding(
-              padding: const EdgeInsets.all(24.0),
+              padding: const EdgeInsets.symmetric(vertical: 24.0, horizontal: 48),
               child: Image.asset('assets/images/logo-colour-sub.png')
                   .animate()
                   .fadeIn(duration: const Duration(milliseconds: 300)),
@@ -90,7 +91,7 @@ class LoginScreen extends ConsumerWidget {
                 text: TextSpan(
                   text:
                       'A Thank You Token is a small object with little intrinsic value which you gift to someone after a meaningful interaction, as a way to express your gratitude. Read more at ',
-                  style: const TextStyle(color: Colors.black),
+                  style: Theme.of(context).textTheme.bodyLarge,
                   children: [
                     TextSpan(
                       text: 'thank-you-token.nl',
@@ -106,11 +107,12 @@ class LoginScreen extends ConsumerWidget {
                 ),
               ),
             ),
-            const Padding(
-              padding: EdgeInsets.all(24),
+            Padding(
+              padding: const EdgeInsets.all(24),
               child: Text(
                 'You can use this app to save the stories behind your tokens. Sign in with your Google account to get started.',
                 textAlign: TextAlign.center,
+                style: Theme.of(context).textTheme.bodyMedium,
               ),
             ),
             SizedBox(

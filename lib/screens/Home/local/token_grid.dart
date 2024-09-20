@@ -13,15 +13,28 @@ class TokenGrid extends ConsumerWidget {
     final tokens = ref.watch(tokensProvider);
     return tokens.when(
         data: (data) => SliverGrid.builder(
+              findChildIndexCallback: (key) =>
+                  data.indexWhere((element) => element.name == key.toString()) +
+                  1,
               gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
                 maxCrossAxisExtent: 400,
                 crossAxisSpacing: 8,
                 mainAxisSpacing: 8,
                 childAspectRatio: 5 / 4,
               ),
-              itemBuilder: (context, index) => index == 0
-                  ? const AddTokenCard()
-                  : TokenCard(token: data[index - 1]),
+              itemBuilder: (context, index) {
+                final item = index == 0
+                    ? const AddTokenCard(
+                        key: ValueKey(0),
+                      )
+                    : TokenCard(
+                        token: data[index - 1],
+                        key: ValueKey(data[index - 1].name),
+                      );
+                return item.animate().fadeIn(
+                      duration: const Duration(milliseconds: 300),
+                    );
+              },
               itemCount: data.length + 1,
             ),
         loading: () => SliverFillRemaining(

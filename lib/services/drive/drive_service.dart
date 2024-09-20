@@ -43,10 +43,7 @@ class DriveServiceApi {
       spaces: 'appDataFolder',
       $fields: 'files($fields)',
     );
-    final accessToken = client.credentials.accessToken.data;
-    return files.files!
-        .map((file) => Token.fromFile(file, accessToken: accessToken))
-        .toList();
+    return files.files!.map((file) => Token.fromFile(file)).toList();
   }
 
   Future<Token> fetchToken({String? id, String? name}) async {

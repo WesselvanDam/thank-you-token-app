@@ -120,6 +120,7 @@ class DetailsInfo extends ConsumerWidget {
               child: TextField(
                 minLines: 1,
                 maxLines: 8,
+                inputFormatters: [LengthLimitingTextInputFormatter(10000)],
                 controller: TextEditingController(text: info.message),
                 onChanged: (value) {
                   ref.read(tokenEditProvider.notifier).updateInfo(

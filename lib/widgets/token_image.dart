@@ -18,6 +18,15 @@ class TokenImage extends StatelessWidget {
         color: Theme.of(context).colorScheme.errorContainer,
         width: double.infinity,
         child: Image.network(token.thumbnailLink.replaceAll('=s220', '=s720'),
+            frameBuilder: (context, child, frame, wasSynchronouslyLoaded) =>
+                wasSynchronouslyLoaded
+                    ? child
+                    : AnimatedOpacity(
+                        opacity: frame == null ? 0 : 1,
+                        duration: const Duration(seconds: 1),
+                        curve: Curves.easeOut,
+                        child: child,
+                      ),
             gaplessPlayback: true,
             width: double.infinity,
             fit: BoxFit.cover,

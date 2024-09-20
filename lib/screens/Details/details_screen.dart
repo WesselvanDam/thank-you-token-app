@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import 'package:smooth_scroll_multiplatform/smooth_scroll_multiplatform.dart';
 import 'package:thank_you_token/models/token.dart';
 import 'package:thank_you_token/providers/token_provider.dart';
 import 'package:thank_you_token/screens/Details/edit_provider.dart';
@@ -18,7 +19,9 @@ class DetailsScreen extends ConsumerWidget {
 
   void _handleSave(WidgetRef ref, Token token) {
     if (ref.read(tokenEditProvider) != token) {
-      ref.read(tokensProvider.notifier).updateToken(ref.read(tokenEditProvider)!);
+      ref
+          .read(tokensProvider.notifier)
+          .updateToken(ref.read(tokenEditProvider)!);
     }
     ref.read(tokenEditProvider.notifier).setToken(null);
   }
@@ -41,8 +44,10 @@ class DetailsScreen extends ConsumerWidget {
       return const SizedBox();
     }
 
-    return AdaptiveScrollView(slivers: [
-      SliverToBoxAdapter(
+    return DynMouseScroll(
+      builder: (context, controller, physics) => SingleChildScrollView(
+        controller: controller,
+        physics: physics,
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
@@ -82,6 +87,6 @@ class DetailsScreen extends ConsumerWidget {
           ],
         ),
       ),
-    ]);
+    );
   }
 }

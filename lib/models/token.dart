@@ -19,7 +19,7 @@ class Token with _$Token {
     required TokenPartialInfo toInfo,
   }) = _Token;
 
-  factory Token.fromFile(File file, {String? accessToken}) {
+  factory Token.fromFile(File file) {
     return Token(
       id: file.id!,
       name: file.name!,

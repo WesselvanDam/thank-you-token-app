@@ -4,7 +4,7 @@ import 'package:thank_you_token/models/token_metadata.dart';
 
 part 'edit_provider.g.dart';
 
-@riverpod
+@Riverpod(keepAlive: true)
 class TokenEdit extends _$TokenEdit {
   @override
   Token? build() => null;

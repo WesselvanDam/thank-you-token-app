@@ -26,9 +26,30 @@ class DetailsScreen extends ConsumerWidget {
     ref.read(tokenEditProvider.notifier).setToken(null);
   }
 
-  void _handleDelete(BuildContext context, WidgetRef ref, Token token) {
-    ref.read(tokensProvider.notifier).deleteToken(token);
-    context.pop();
+  void _handleDelete(BuildContext context, WidgetRef ref, Token token) async {
+    showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: const Text('Delete token'),
+        content: const Text('Are you sure you want to delete this token?'),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.of(context).pop(false),
+            child: const Text('Cancel'),
+          ),
+          TextButton(
+            onPressed: () => Navigator.of(context).pop(true),
+            child: const Text('Delete'),
+          ),
+        ],
+      ),
+    ).then(
+      (shouldDelete) {
+        if (!shouldDelete) return;
+        ref.read(tokensProvider.notifier).deleteToken(token);
+        context.pop();
+      },
+    );
   }
 
   @override

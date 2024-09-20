@@ -29,23 +29,21 @@ class MyApp extends ConsumerWidget {
   }
 }
 
-extension CopyWithFamily on TextStyle {
-  TextStyle copyWithFamily(String family) => copyWith(fontFamily: family);
-}
-
 ThemeData themeData(BuildContext context) {
+  const bodyFamily = 'AtkinsonHyperlegible';
+  const headlineFamily = 'HurmeGeometricSans';
   TextTheme textTheme = Theme.of(context).textTheme.apply(
-    fontFamily: 'AtkinsonHyperlegible',
-  );
+        fontFamily: bodyFamily,
+      );
   textTheme = textTheme.copyWith(
-    headlineSmall: textTheme.headlineSmall?.copyWithFamily('HurmeGeometricSans'),
-    headlineMedium: textTheme.headlineMedium?.copyWithFamily('HurmeGeometricSans'),
-    headlineLarge: textTheme.headlineLarge?.copyWithFamily('HurmeGeometricSans'),
-    displaySmall: textTheme.displaySmall?.copyWithFamily('HurmeGeometricSans'),
-    displayMedium: textTheme.displayMedium?.copyWithFamily('HurmeGeometricSans'),
-    displayLarge: textTheme.displayLarge?.copyWithFamily('HurmeGeometricSans'),
+    headlineSmall: textTheme.headlineSmall?.copyWithFamily(headlineFamily),
+    headlineMedium: textTheme.headlineMedium?.copyWithFamily(headlineFamily),
+    headlineLarge: textTheme.headlineLarge?.copyWithFamily(headlineFamily),
+    displaySmall: textTheme.displaySmall?.copyWithFamily(headlineFamily),
+    displayMedium: textTheme.displayMedium?.copyWithFamily(headlineFamily),
+    displayLarge: textTheme.displayLarge?.copyWithFamily(headlineFamily),
   );
-  
+
   return ThemeData(
     useMaterial3: true,
     colorScheme: ColorScheme.fromSeed(seedColor: CustomColors.tytBlue),

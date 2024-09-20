@@ -7,7 +7,6 @@ import 'package:thank_you_token/providers/token_provider.dart';
 import 'package:thank_you_token/screens/Details/edit_provider.dart';
 import 'package:thank_you_token/screens/Details/local/details_info.dart';
 import 'package:thank_you_token/utils/extensions.dart';
-import 'package:thank_you_token/widgets/adaptive_scroll.dart';
 import 'package:thank_you_token/widgets/token_image.dart';
 
 class DetailsScreen extends ConsumerWidget {

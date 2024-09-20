@@ -16,3 +16,8 @@ extension CustomColors on Colors {
   static const Color tytBlue = Color(0xFF187498);
   static const Color tytYellow = Color(0xFFF9D923);
 }
+
+
+extension CopyWithFamily on TextStyle {
+  TextStyle copyWithFamily(String family) => copyWith(fontFamily: family);
+}

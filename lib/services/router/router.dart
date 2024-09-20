@@ -4,7 +4,6 @@ import 'package:go_router/go_router.dart';
 import 'package:thank_you_token/main.dart';
 import 'package:thank_you_token/providers/user_provider.dart';
 import 'package:thank_you_token/services/router/routes.dart';
-import 'package:thank_you_token/utils/extensions.dart';
 
 final routerProvider = StateProvider<GoRouter>((ref) {
   final isLoggedIn = ValueNotifier<bool>(initialLogIn);

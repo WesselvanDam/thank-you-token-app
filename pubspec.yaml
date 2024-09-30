@@ -46,7 +46,7 @@ flutter:
     - assets/images/glyph_white.png
     - assets/images/glyph_color.png
     - assets/images/banner.jpg
-    - assets/images/logo-colour-sub.png
+    - assets/images/logo.png
 
   fonts:
     - family: AtkinsonHyperlegible

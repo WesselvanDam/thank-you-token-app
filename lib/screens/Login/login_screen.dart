@@ -80,7 +80,7 @@ class LoginScreen extends ConsumerWidget {
           children: [
             Padding(
               padding: const EdgeInsets.symmetric(vertical: 24.0, horizontal: 48),
-              child: Image.asset('assets/images/logo-colour-sub.png')
+              child: Image.asset('assets/images/logo.png')
                   .animate()
                   .fadeIn(duration: const Duration(milliseconds: 300)),
             ),
@@ -90,7 +90,7 @@ class LoginScreen extends ConsumerWidget {
                 textAlign: TextAlign.center,
                 text: TextSpan(
                   text:
-                      'A Thank You Token is a small object with little intrinsic value which you gift to someone after a meaningful interaction, as a way to express your gratitude. Read more at ',
+                      'A Thank You Token is a small object with little intrinsic value that you gift to someone after a meaningful interaction, as a way to express your gratitude. Read more at ',
                   style: Theme.of(context).textTheme.bodyLarge,
                   children: [
                     TextSpan(

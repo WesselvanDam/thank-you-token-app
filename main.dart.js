@@ -101122,9 +101122,9 @@ apM(a,b){var s=a.b-b,r=a.d*1.7777777777777777,q=r*0.3541666666666667
 if(q>s/2)return-1+(2*q-s)/r
 else return-1},
 hb(a,b){return A.aND(null,new A.o1(new A.af7(this),null))},
-Yj(a){var s=null,r=A.a9S(A.a3I(A.P0("assets/images/logo-colour-sub.png",B.N,s,s,!1,s,s)),s,B.b3),q=A.Q(a),p=A.apU(s,s)
+Yj(a){var s=null,r=A.a9S(A.a3I(A.P0("assets/images/logo.png",B.N,s,s,!1,s,s)),s,B.b3),q=A.Q(a),p=A.apU(s,s)
 p.aV=new A.af8()
-return A.aoA(new A.bt(B.FB,A.dT(A.b([new A.bt(B.FN,r,s),new A.bt(B.jY,A.aH8(s,s,B.aA,s,s,!0,s,A.cJ(A.b([A.cJ(s,p,B.Sg,"thank-you-token.nl"),B.RR],t.VO),s,q.p2.y,"A Thank You Token is a small object with little intrinsic value which you gift to someone after a meaningful interaction, as a way to express your gratitude. Read more at "),B.fp,s,s,B.X,B.a5),s),new A.bt(B.nS,A.cY("You can use this app to save the stories behind your tokens. Sign in with your Google account to get started.",s,s,s,A.Q(a).p2.z,B.fp,s),s),A.dm(t.Pu.a($.pD()).axG(new A.abz(B.oo,B.on,B.ol,B.om,B.ok,B.oj)),44,s),B.Qz,A.t1(B.W8,new A.af9(),s)],t.p),B.Z,B.c6,B.ah),s),s,s,s)}}
+return A.aoA(new A.bt(B.FB,A.dT(A.b([new A.bt(B.FN,r,s),new A.bt(B.jY,A.aH8(s,s,B.aA,s,s,!0,s,A.cJ(A.b([A.cJ(s,p,B.Sg,"thank-you-token.nl"),B.RR],t.VO),s,q.p2.y,"A Thank You Token is a small object with little intrinsic value that you gift to someone after a meaningful interaction, as a way to express your gratitude. Read more at "),B.fp,s,s,B.X,B.a5),s),new A.bt(B.nS,A.cY("You can use this app to save the stories behind your tokens. Sign in with your Google account to get started.",s,s,s,A.Q(a).p2.z,B.fp,s),s),A.dm(t.Pu.a($.pD()).axG(new A.abz(B.oo,B.on,B.ol,B.om,B.ok,B.oj)),44,s),B.Qz,A.t1(B.W8,new A.af9(),s)],t.p),B.Z,B.c6,B.ah),s),s,s,s)}}
 A.af7.prototype={
 $2(a,b){var s=null,r=b.b,q=r>800?420:300
 if(r>440){r=this.a

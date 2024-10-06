@@ -13,18 +13,17 @@ To try out the app, visit the [web version](https://app.thank-you-token.nl).
 
 ### Prerequisites
 - Flutter SDK
-- A code editor (e.g. Android Studio, Visual Studio Code)
 - A Google account
+
+### Steps
 
 1. Clone the repository
 
 ```bash
 git clone https://github.com/WesselvanDam/thank-you-token-app.git
+cd thank-you-token-app
 ```
-
-2. Open the project in Android Studio or Visual Studio Code
-
-3. Run the app
+2. Run the app
 
 ```bash
 flutter run --web-hostname localhost --web-port 56348

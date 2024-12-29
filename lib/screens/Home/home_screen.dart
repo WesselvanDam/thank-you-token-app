@@ -49,19 +49,19 @@ class HomeScreen extends ConsumerWidget {
           ),
           onSelected: (value) {
             switch (value) {
-              case 'Sign out':
-                googleSignIn.disconnect();
               case 'Refresh':
                 ref.invalidate(tokensProvider);
               case 'About':
                 launchUrl(Uri.parse('https://thank-you-token.nl'));
+              case 'Sign out':
+                googleSignIn.disconnect();                
             }
           },
           itemBuilder: (BuildContext context) {
             return {
-              ('Sign out', Icons.logout),
               ('Refresh', Icons.refresh),
               ('About', Icons.info),
+              ('Sign out', Icons.logout),
             }.map((choice) {
               return PopupMenuItem<String>(
                 value: choice.$1,

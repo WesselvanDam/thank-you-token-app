@@ -1,4 +1,5 @@
 import 'package:flutter/foundation.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:googleapis/drive/v3.dart';
 import 'package:extension_google_sign_in_as_googleapis_auth/extension_google_sign_in_as_googleapis_auth.dart';
 import 'package:googleapis_auth/googleapis_auth.dart' as auth show AuthClient;
@@ -13,11 +14,24 @@ class DriveServiceApi {
   DriveServiceApi();
 
   Future<bool> isAppAuthorised() async {
-    final isAuthorised = await googleSignIn.canAccessScopes(scopes);
-    if (isAuthorised) return true;
-    return googleSignIn.requestScopes(scopes).then((isAuthorisedNow) {
-      return isAuthorisedNow;
+    return googleSignIn
+        .canAccessScopes(scopes)
+        .then((isAuthorised) => isAuthorised)
+        .catchError((error) {
+      debugPrint('Error checking authorisation: $error');
+      return false;
     });
+  }
+
+  Future<bool> requestAuthorisation() async {
+    return googleSignIn
+        .requestScopes(scopes)
+        .then((isAuthorisedNow) => isAuthorisedNow)
+        .catchError((_) => false);
+  }
+
+  Future<GoogleSignInAccount?> revokeAuthorisation() async {
+    return googleSignIn.disconnect();
   }
 
   Future<auth.AuthClient> getClient() async {
@@ -29,13 +43,6 @@ class DriveServiceApi {
   }
 
   Future<List<Token>> fetchTokens() async {
-    final isAuthorised = await isAppAuthorised();
-    if (!isAuthorised) {
-      throw Exception(
-        'You have not authorised the app to access your Google Drive',
-      );
-    }
-
     final client = await getClient();
     final api = DriveApi(client);
 

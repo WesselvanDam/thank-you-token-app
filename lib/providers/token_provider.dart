@@ -1,4 +1,5 @@
 import 'package:flutter/foundation.dart';
+import 'package:googleapis_auth/googleapis_auth.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:thank_you_token/models/token.dart';
@@ -10,6 +11,10 @@ part 'token_provider.g.dart';
 class Tokens extends _$Tokens {
   @override
   FutureOr<List<Token>> build() async {
+    final isAuthorised = await DriveServiceApi().isAppAuthorised();
+    if (!isAuthorised) {
+      throw UserConsentException("User did not give their consent.");
+    }
     return DriveServiceApi().fetchTokens();
   }
 

@@ -28,6 +28,7 @@ dependencies:
   url_launcher: ^6.3.0
   async: ^2.11.0
   smooth_scroll_multiplatform: ^1.0.8
+  image_cropper: ^8.1.0
 
 dev_dependencies:
   flutter_test:
@@ -47,6 +48,8 @@ flutter:
     - assets/images/glyph_color.png
     - assets/images/banner.jpg
     - assets/images/logo.png
+    - assets/images/app_illustration.png
+    - assets/images/store_illustration.png
 
   fonts:
     - family: AtkinsonHyperlegible

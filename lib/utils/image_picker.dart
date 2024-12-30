@@ -1,18 +1,22 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:image_cropper/image_cropper.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:thank_you_token/providers/token_provider.dart';
+import 'package:thank_you_token/utils/authorisation_check.dart';
 
-Future<void> addTokenSequence(BuildContext context, WidgetRef ref) async {
-  final pickedImage = await imagePicker(context).then((image) {
-    if (image == null) return null;
-    return imageCropper(context, image, 16 / 9);
+Future<bool?> addTokenSequence(BuildContext context, WidgetRef ref) async {
+  return imagePicker(context).then((pickedImage) {
+    if (pickedImage == null) return null;
+
+    return imageCropper(context, pickedImage, 16 / 9)
+        .then((croppedImage) async {
+      if (croppedImage == null) return null;
+      if (!(await checkAuthorisation(context) ?? false)) return null;
+
+      return ref.read(tokensProvider.notifier).addToken(pickedImage);
+    });
   });
-
-  if (pickedImage == null) return;
-  await ref.read(tokensProvider.notifier).addToken(pickedImage);
 }
 
 /// A utility function that allows the user to pick an image from their gallery.

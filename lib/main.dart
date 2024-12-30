@@ -1,17 +1,19 @@
+import 'package:thank_you_token/providers/user_provider.dart';
+import 'package:thank_you_token/services/drive/drive_service.dart';
 import 'package:thank_you_token/utils/extensions.dart';
 import 'package:url_strategy/url_strategy.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:thank_you_token/services/auth/auth_service.dart';
 import 'package:thank_you_token/services/router/router.dart';
-
-late final bool initialLogIn;
 
 void main() async {
   setPathUrlStrategy();
-  initialLogIn = await googleSignIn.signInSilently() != null;
-  runApp(const ProviderScope(child: MyApp()));
+  final signedInUser = await DriveServiceApi().signInSilently();
+  runApp(ProviderScope(
+    overrides: [initialUserProvider.overrideWithValue(signedInUser)],
+    child: const MyApp(),
+  ));
 }
 
 class MyApp extends ConsumerWidget {

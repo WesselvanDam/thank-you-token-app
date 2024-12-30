@@ -4,7 +4,7 @@ import 'package:smooth_scroll_multiplatform/smooth_scroll_multiplatform.dart';
 import 'package:thank_you_token/providers/token_provider.dart';
 import 'package:thank_you_token/providers/user_provider.dart';
 import 'package:thank_you_token/screens/Home/local/token_grid.dart';
-import 'package:thank_you_token/services/auth/auth_service.dart';
+import 'package:thank_you_token/services/drive/drive_service.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class HomeScreen extends ConsumerWidget {
@@ -12,7 +12,8 @@ class HomeScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final user = ref.watch(userProvider).value;
+    final user = ref.watch(userProvider);
+    if (user == null) return const SizedBox.shrink();
 
     return DynMouseScroll(
       builder: (context, controller, physics) => CustomScrollView(
@@ -28,7 +29,7 @@ class HomeScreen extends ConsumerWidget {
               ),
             ),
             title: Text(
-              'Welcome, ${user?.displayName?.split(' ').first ?? 'Guest'}',
+              'Welcome, ${user.displayName?.split(' ').first ?? 'Guest'}',
             ),
             actions: actions(ref),
           ),
@@ -39,6 +40,13 @@ class HomeScreen extends ConsumerWidget {
   }
 
   List<Widget> actions(WidgetRef ref) => [
+        if (ref.watch(userProvider)?.photoUrl != null)
+          Tooltip(
+            message: 'Signed in as ${ref.watch(userProvider)!.email}',
+            child: CircleAvatar(
+              backgroundImage: NetworkImage(ref.watch(userProvider)!.photoUrl!),
+            ),
+          ),
         PopupMenuButton<String>(
           popUpAnimationStyle: AnimationStyle(
             curve: Curves.easeInOut,
@@ -49,17 +57,17 @@ class HomeScreen extends ConsumerWidget {
           ),
           onSelected: (value) {
             switch (value) {
-              case 'Refresh':
+              case 'Refresh Tokens':
                 ref.invalidate(tokensProvider);
               case 'About':
                 launchUrl(Uri.parse('https://thank-you-token.nl'));
               case 'Sign out':
-                googleSignIn.disconnect();                
+                DriveServiceApi().signOut();
             }
           },
           itemBuilder: (BuildContext context) {
             return {
-              ('Refresh', Icons.refresh),
+              ('Refresh Tokens', Icons.refresh),
               ('About', Icons.info),
               ('Sign out', Icons.logout),
             }.map((choice) {

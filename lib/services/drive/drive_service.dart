@@ -5,37 +5,50 @@ import 'package:extension_google_sign_in_as_googleapis_auth/extension_google_sig
 import 'package:googleapis_auth/googleapis_auth.dart' as auth show AuthClient;
 import 'package:image_picker/image_picker.dart';
 import 'package:thank_you_token/models/token.dart';
-import 'package:thank_you_token/services/auth/auth_service.dart';
 
-final scopes = [DriveApi.driveAppdataScope];
+final scopes = [
+  'https://www.googleapis.com/auth/userinfo.profile',
+  DriveApi.driveAppdataScope
+];
 const fields = 'id, name, description, properties, thumbnailLink, createdTime';
+
+final GoogleSignIn _googleSignIn = GoogleSignIn(
+  clientId:
+      '261520608365-72hv2nusnvam645c2dqp4gd8ti1fs7vi.apps.googleusercontent.com',
+  scopes: scopes,
+);
 
 class DriveServiceApi {
   DriveServiceApi();
 
+  Future<GoogleSignInAccount?> signInSilently() async {
+    return _googleSignIn.signInSilently();
+  }
+
+  Future<GoogleSignInAccount?> signOut() async {
+    return _googleSignIn.disconnect();
+  }
+
+  Stream<GoogleSignInAccount?> onCurrentUserChanged() {
+    return _googleSignIn.onCurrentUserChanged;
+  }
+
   Future<bool> isAppAuthorised() async {
-    return googleSignIn
+    return _googleSignIn
         .canAccessScopes(scopes)
         .then((isAuthorised) => isAuthorised)
-        .catchError((error) {
-      debugPrint('Error checking authorisation: $error');
-      return false;
-    });
+        .catchError((error) => false);
   }
 
   Future<bool> requestAuthorisation() async {
-    return googleSignIn
+    return _googleSignIn
         .requestScopes(scopes)
         .then((isAuthorisedNow) => isAuthorisedNow)
         .catchError((_) => false);
   }
 
-  Future<GoogleSignInAccount?> revokeAuthorisation() async {
-    return googleSignIn.disconnect();
-  }
-
   Future<auth.AuthClient> getClient() async {
-    final client = await googleSignIn.authenticatedClient();
+    final client = await _googleSignIn.authenticatedClient();
     if (client == null) {
       throw Exception('Client is null');
     }
@@ -53,7 +66,7 @@ class DriveServiceApi {
     return files.files!.map((file) => Token.fromFile(file)).toList();
   }
 
-  Future<Token> fetchToken({String? id, String? name}) async {
+  Future<Token> _fetchToken({String? id, String? name}) async {
     final client = await getClient();
     final api = DriveApi(client);
     if (id != null) {
@@ -90,7 +103,7 @@ class DriveServiceApi {
       return Token.fromFile(file);
     }).catchError((error) {
       debugPrint("Error: $error");
-      return fetchToken(name: name);
+      return _fetchToken(name: name);
     });
   }
 
@@ -104,7 +117,7 @@ class DriveServiceApi {
       return Token.fromFile(file);
     }).catchError((error) {
       debugPrint("Error: $error");
-      return fetchToken(id: token.id);
+      return _fetchToken(id: token.id);
     });
   }
 

@@ -6,18 +6,24 @@ import 'package:thank_you_token/models/token.dart';
 import 'package:thank_you_token/providers/token_provider.dart';
 import 'package:thank_you_token/screens/Details/edit_provider.dart';
 import 'package:thank_you_token/screens/Details/local/details_info.dart';
+import 'package:thank_you_token/utils/authorisation_check.dart';
 import 'package:thank_you_token/utils/extensions.dart';
 import 'package:thank_you_token/widgets/token_image.dart';
 
 class DetailsScreen extends ConsumerWidget {
   const DetailsScreen({super.key});
 
-  void _handleEdit(WidgetRef ref, Token token) {
+  Future<void> _handleEdit(
+      BuildContext context, WidgetRef ref, Token token) async {
+    if (!(await checkAuthorisation(context) ?? false)) return;
+
     ref.read(tokenEditProvider.notifier).setToken(token);
   }
 
-  void _handleSave(WidgetRef ref, Token token) {
+  Future<void> _handleSave(
+      BuildContext context, WidgetRef ref, Token token) async {
     if (ref.read(tokenEditProvider) != token) {
+      if (!(await checkAuthorisation(context) ?? false)) return;
       ref
           .read(tokensProvider.notifier)
           .updateToken(ref.read(tokenEditProvider)!);
@@ -43,12 +49,13 @@ class DetailsScreen extends ConsumerWidget {
         ],
       ),
     ).then(
-      (shouldDelete) {
+      (shouldDelete) async {
         if (!shouldDelete) return;
+        if (!(await checkAuthorisation(context) ?? false)) return;
+
         ref.read(tokensProvider.notifier).deleteToken(token);
-        context.pop();
       },
-    );
+    ).then((_) => context.pop());
   }
 
   @override
@@ -75,6 +82,7 @@ class DetailsScreen extends ConsumerWidget {
               aspectRatio: 16 / 9,
               child: TokenImage(token, borderRadius: 24),
             ),
+            const SizedBox(height: 12),
             Column(
               children: [
                 DetailsInfo(token.fromInfo),
@@ -82,10 +90,11 @@ class DetailsScreen extends ConsumerWidget {
                 DetailsInfo(token.toInfo),
               ],
             ),
+            const SizedBox(height: 12),
             ButtonBar(
               alignment: MainAxisAlignment.end,
               children: [
-                OutlinedButton.icon(
+                TextButton.icon(
                   icon: const Icon(Icons.delete),
                   label: const Text('Delete'),
                   onPressed: () => _handleDelete(context, ref, token),
@@ -94,13 +103,13 @@ class DetailsScreen extends ConsumerWidget {
                   FilledButton.icon(
                     icon: const Icon(Icons.save),
                     label: const Text('Save'),
-                    onPressed: () => _handleSave(ref, token),
+                    onPressed: () => _handleSave(context, ref, token),
                   )
                 else
                   FilledButton.tonalIcon(
                     icon: const Icon(Icons.edit),
                     label: const Text('Edit'),
-                    onPressed: () => _handleEdit(ref, token),
+                    onPressed: () => _handleEdit(context, ref, token),
                   ),
               ],
             ),

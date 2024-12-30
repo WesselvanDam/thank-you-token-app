@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:image_picker/image_picker.dart';
-import 'package:thank_you_token/providers/token_provider.dart';
-import 'package:thank_you_token/utils/picker.dart';
+import 'package:thank_you_token/utils/image_picker.dart';
 
 class AddTokenCard extends ConsumerStatefulWidget {
   const AddTokenCard({super.key});

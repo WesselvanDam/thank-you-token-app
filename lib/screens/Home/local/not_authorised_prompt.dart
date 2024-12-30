@@ -26,12 +26,13 @@ class NotAuthorisedPrompt extends ConsumerWidget {
             Text.rich(
               textAlign: TextAlign.center,
               TextSpan(
-                text: "Let's get started!",
+                text: "Connect to Drive",
                 style: Theme.of(context).textTheme.headlineSmall,
                 children: [
                   TextSpan(
                     text:
-                        '\n\nGive the app access to your Google Drive to start adding tokens.',
+                        '\n\nConnect this app to Google Drive to give it access to your tokens. '
+                        'You will have to do this every time you use the app.',
                     style: Theme.of(context).textTheme.labelLarge,
                   ),
                   TextSpan(
@@ -72,7 +73,9 @@ class NotAuthorisedPrompt extends ConsumerWidget {
               'The Thank You Token App stores tokens in your own Google Drive. '
               'This way, you can access your tokens from any device, while keeping '
               'them private. The app only has access to the folder it creates in '
-              'your Drive. You can revoke access at any time in your Google Account settings.',
+              'your Drive. You can revoke access at any time in your Google Account settings.'
+              '\nDue to the way Google handles authorisation, you have to give the app '
+              'access to your Drive every time you use the app.'
             ),
           ),
           actions: [

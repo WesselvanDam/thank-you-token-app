@@ -7,19 +7,36 @@ import 'package:thank_you_token/screens/Details/edit_provider.dart';
 import 'package:thank_you_token/widgets/details_icon.dart';
 import 'package:thank_you_token/widgets/details_name.dart';
 
-class DetailsInfo extends ConsumerWidget {
+class DetailsInfo extends ConsumerStatefulWidget {
   const DetailsInfo(this.info, {super.key});
 
   final TokenPartialInfo info;
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  ConsumerState<ConsumerStatefulWidget> createState() => _DetailsInfoState();
+}
+
+class _DetailsInfoState extends ConsumerState<DetailsInfo> {
+
+  late TextEditingController _nameController;
+  late TextEditingController _descriptionController;
+
+  @override
+  void initState() {
+    super.initState();
+    _nameController = TextEditingController(text: widget.info.name);
+    _descriptionController = TextEditingController(text: widget.info.message);
+  }
+
+  @override
+  Widget build(BuildContext context) {
     return ref.watch(tokenEditProvider.select((value) => value == null))
         ? showInfo(context, ref)
         : editInfo(context, ref);
   }
 
   Widget showInfo(BuildContext context, WidgetRef ref) {
+    final info = widget.info;
     return Column(
       mainAxisSize: MainAxisSize.min,
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -36,7 +53,7 @@ class DetailsInfo extends ConsumerWidget {
                 ),
         ),
         Padding(
-          padding: const EdgeInsets.all(8.0),
+          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
           child: Text(
             info.message ?? 'No description added',
             style: Theme.of(context).textTheme.bodyMedium,
@@ -47,6 +64,7 @@ class DetailsInfo extends ConsumerWidget {
   }
 
   Widget editInfo(BuildContext context, WidgetRef ref) {
+    final info = widget.info;
     return FocusTraversalGroup(
       child: Column(
         mainAxisSize: MainAxisSize.min,
@@ -58,7 +76,7 @@ class DetailsInfo extends ConsumerWidget {
               borderRadius: BorderRadius.circular(8),
               child: TextField(
                 inputFormatters: [LengthLimitingTextInputFormatter(50)],
-                controller: TextEditingController(text: info.name),
+                controller: _nameController,
                 onChanged: (value) {
                   ref.read(tokenEditProvider.notifier).updateInfo(
                         info.isFrom,
@@ -121,7 +139,7 @@ class DetailsInfo extends ConsumerWidget {
                 minLines: 1,
                 maxLines: 8,
                 inputFormatters: [LengthLimitingTextInputFormatter(10000)],
-                controller: TextEditingController(text: info.message),
+                controller: _descriptionController,
                 onChanged: (value) {
                   ref.read(tokenEditProvider.notifier).updateInfo(
                         info.isFrom,

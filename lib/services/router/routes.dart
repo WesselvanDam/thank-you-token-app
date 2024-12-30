@@ -1,8 +1,11 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:thank_you_token/screens/Details/details_screen.dart';
 import 'package:thank_you_token/screens/Home/home_screen.dart';
 import 'package:thank_you_token/screens/Login/login_screen.dart';
+import 'package:thank_you_token/services/drive/drive_service.dart';
 import 'package:thank_you_token/services/router/local/details_page.dart';
 
 part 'routes.g.dart';
@@ -59,5 +62,14 @@ class TokenDetailsRoute extends GoRouteData {
   @override
   Page buildPage(BuildContext context, GoRouterState state) {
     return const DetailsPage(child: DetailsScreen());
+  }
+
+  @override
+  FutureOr<String?> redirect(BuildContext context, GoRouterState state) async {
+    final isAuthorised = await DriveServiceApi().isAppAuthorised();
+    if (!isAuthorised) {
+      // Redirect to the home screen if the user is not authorised
+      return HomeRoute().location;
+    }
   }
 }

@@ -1,14 +1,24 @@
-import 'package:async/async.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_sign_in/google_sign_in.dart';
-import 'package:thank_you_token/services/auth/auth_service.dart';
+import 'package:riverpod_annotation/riverpod_annotation.dart';
+import 'package:thank_you_token/services/drive/drive_service.dart';
 
-// If there is an initial login, the user is googleSignIn.currentUser. Return
-// that, but afterwards listen to googleSignIn.onCurrentUserChanged and return
-// the new user.
-final userProvider = StreamProvider<GoogleSignInAccount?>(
-  (ref) => StreamGroup.merge([
-    Stream.value(googleSignIn.currentUser),
-    googleSignIn.onCurrentUserChanged
-  ]),
-);
+part 'user_provider.g.dart';
+
+@Riverpod(keepAlive: true)
+class User extends _$User {
+  @override
+  GoogleSignInAccount? build() {
+    final initialUser = ref.watch(initialUserProvider);
+    if (initialUser != null) {
+      return initialUser;
+    } else {
+      DriveServiceApi().onCurrentUserChanged().listen((user) {
+        state = user;
+      });
+      return null;
+    }
+  }
+}
+
+@Riverpod(keepAlive: true)
+GoogleSignInAccount? initialUser(InitialUserRef ref) => null;

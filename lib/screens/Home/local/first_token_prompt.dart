@@ -1,54 +1,73 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:thank_you_token/utils/picker.dart';
+import 'package:thank_you_token/utils/image_picker.dart';
 
-class FirstTokenPrompt extends ConsumerWidget {
+class FirstTokenPrompt extends ConsumerStatefulWidget {
   const FirstTokenPrompt({super.key});
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  ConsumerState<ConsumerStatefulWidget> createState() =>
+      _FirstTokenPromptState();
+}
+
+class _FirstTokenPromptState extends ConsumerState<FirstTokenPrompt> {
+  bool isAsync = false;
+
+  void _handleAddToken() {
+    if (isAsync) return;
+    setState(() => isAsync = true);
+    addTokenSequence(context, ref).then((_) => setState(() => isAsync = false));
+  }
+
+  @override
+  Widget build(BuildContext context) {
     return Center(
       child: Padding(
         padding: const EdgeInsets.all(8.0),
         child: ConstrainedBox(
           constraints: const BoxConstraints(maxWidth: 400),
-          child: Column(mainAxisSize: MainAxisSize.min, children: [
-            Image.asset(
-              'assets/images/store_illustration.png',
-              height: 810 * (400 / 1080),
-              width: 400,
-            ),
-            const SizedBox(height: 24),
-            Text.rich(
-              textAlign: TextAlign.center,
-              TextSpan(
-                text: "Create your first token!",
-                style: Theme.of(context).textTheme.headlineSmall,
-                children: [
-                  TextSpan(
-                    text:
-                        '\n\nTake a picture of your token and add it to your collection.',
-                    style: Theme.of(context).textTheme.labelLarge,
-                  ),
-                  TextSpan(
-                    text: ' Read more.',
-                    style: Theme.of(context).textTheme.labelLarge!.copyWith(
-                          color: Theme.of(context).colorScheme.primary,
-                        ),
-                    recognizer: TapGestureRecognizer()
-                      ..onTap = () => showMoreInfo(context),
-                  ),
-                ],
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Image.asset(
+                'assets/images/store_illustration.png',
+                height: 810 * (400 / 1080),
+                width: 400,
               ),
-            ),
-            const SizedBox(height: 12),
-            FilledButton.icon(
-              icon: const Icon(Icons.add),
-              onPressed: () => addTokenSequence(context, ref),
-              label: const Text('Add token'),
-            ),
-          ]),
+              const SizedBox(height: 24),
+              Text.rich(
+                textAlign: TextAlign.center,
+                TextSpan(
+                  text: "Create your first token!",
+                  style: Theme.of(context).textTheme.headlineSmall,
+                  children: [
+                    TextSpan(
+                      text:
+                          '\n\nFirst, take a picture of your token. Next, tap the button below to add it to your collection.',
+                      style: Theme.of(context).textTheme.labelLarge,
+                    ),
+                    TextSpan(
+                      text: ' Read more.',
+                      style: Theme.of(context).textTheme.labelLarge!.copyWith(
+                            color: Theme.of(context).colorScheme.primary,
+                          ),
+                      recognizer: TapGestureRecognizer()
+                        ..onTap = () => showMoreInfo(context),
+                    ),
+                  ],
+                ),
+              ),
+              const SizedBox(height: 12),
+              isAsync 
+                ? const CircularProgressIndicator()
+                : FilledButton.icon(
+                  icon: const Icon(Icons.add),
+                  onPressed: () => _handleAddToken(),
+                  label: const Text('Add token'),
+                ),
+            ],
+          ),
         ),
       ),
     );

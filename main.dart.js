@@ -90616,7 +90616,7 @@ ap2(a,b){return this.c.$2(a,b)},
 akO(a){return this.d.$1(a)}}
 A.Jb.prototype={
 I(a){var s,r,q=this,p=null,o=q.e
-if(o==null)return B.Rv
+if(o==null)return B.Ru
 if(!q.f)return new A.Zr(new A.aAM(o),p,p)
 s=q.r
 if(s==null)s=q.r=q.a.ap2(a,o)
@@ -103559,7 +103559,7 @@ p=$.u8()
 o=b.jP(new A.k7(p,new A.a8b(q),p.$ti.i("k7<e9.0,br?>")),t.cB)
 p=$.pK()
 n=b.jP(new A.k7(p,new A.a8c(),p.$ti.i("k7<e9.0,y>")),t.y)
-if(o==null)return B.Ru
+if(o==null)return B.Rt
 return A.aNL(new A.a8d(this,o,b,n))}}
 A.a84.prototype={
 $1(a){var s=null
@@ -103754,7 +103754,7 @@ return A.a4(new A.h5(s,new A.adV(),r),!0,r.i("A.E"))},
 $S:658}
 A.adV.prototype={
 $1(a){var s=null,r=a.a
-return new A.kV(r,A.fN(A.b([A.qS(a.b,s,s),B.Rr,A.cK(r,s,s,s,s,s,s)],t.p),B.I,B.M,B.a4),s,t.wI)},
+return new A.kV(r,A.fN(A.b([A.qS(a.b,s,s),B.Rq,A.cK(r,s,s,s,s,s,s)],t.p),B.I,B.M,B.a4),s,t.wI)},
 $S:659}
 A.BS.prototype={
 ae(){return new A.Xw(B.i)}}
@@ -103792,7 +103792,7 @@ $0(){return this.a.afy()},
 $S:0}
 A.ay1.prototype={
 $1(a){var s=null
-return A.a4D(A.b([A.j1(!1,B.AO,s,s,B.aP,s,s,s,s,new A.ay0(a),s,s)],t.p),B.Rs,B.oP,B.Xc)},
+return A.a4D(A.b([A.j1(!1,B.AO,s,s,B.aP,s,s,s,s,new A.ay0(a),s,s)],t.p),B.Rr,B.oP,B.Xc)},
 $S:131}
 A.ay0.prototype={
 $0(){return A.eM(this.a,!1).eC()},
@@ -103821,7 +103821,7 @@ s.gAk().a0L(r)}return null},
 $S:12}
 A.akl.prototype={
 $1(a){var s=null
-return A.a4D(A.b([A.j1(!1,B.AO,s,s,B.aP,s,s,s,s,new A.akk(a),s,s)],t.p),B.Rq,B.oP,B.Xa)},
+return A.a4D(A.b([A.j1(!1,B.AO,s,s,B.aP,s,s,s,s,new A.akk(a),s,s)],t.p),B.Rv,B.oP,B.Xa)},
 $S:131}
 A.akk.prototype={
 $0(){return A.eM(this.a,!1).eC()},
@@ -108402,8 +108402,8 @@ B.m=new A.K(0,0)
 B.GK=new A.P4(B.m,B.m)
 B.os=new A.P5(0,"tight")
 B.bt=new A.P5(1,"loose")
-B.Rt=new A.eS(null,38,null,null)
-B.GL=new A.e2(1,B.bt,B.Rt,null)
+B.Rs=new A.eS(null,38,null,null)
+B.GL=new A.e2(1,B.bt,B.Rs,null)
 B.GM=new A.ve(null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null)
 B.ot=new A.BX(0,"Start")
 B.hi=new A.BX(1,"Update")
@@ -110204,16 +110204,16 @@ B.Rm=new A.K(496,346)
 B.Ro=new A.K(77.37,37.9)
 B.au=new A.eS(0,0,null,null)
 B.Rp=new A.eS(108,null,null,null)
-B.X9=new A.cw("The Thank You Token App stores tokens in your own Google Drive. This way, you can access your tokens from any device, while keeping them private. The app only has access to the folder it creates in your Drive. You can revoke access at any time in your Google Account settings.\nDue to the way Google handles authorisation, you have to give the app access to your Drive every time you use the app.",null,null,null,null,null,null,null,null)
-B.Rq=new A.eS(400,null,B.X9,null)
-B.Rr=new A.eS(8,null,null,null)
-B.Xg=new A.cw("A token is stored as a single image, which you can pick from your gallery. After selecting and cropping the image, it gets added to your collection. Next, you can write down the story behind the token: who gave it to you, when, and why. Once you have given the token away again, you can add the story behind that exchange as well.",null,null,null,null,null,null,null,null)
-B.Rs=new A.eS(400,null,B.Xg,null)
+B.Rq=new A.eS(8,null,null,null)
+B.Xg=new A.cw("A token is stored as a single image, which you can pick from your gallery. After selecting and cropping the image, it gets added to your collection. \n\nNext, you can write down the story behind the token: who gave it to you, when, and why. Once you have given the token away again, you can add the story behind that exchange as well.",null,null,null,null,null,null,null,null)
+B.Rr=new A.eS(400,null,B.Xg,null)
 B.fr=new A.eS(null,12,null,null)
 B.ir=new A.eS(null,16,null,null)
 B.An=new A.eS(null,24,null,null)
-B.Ru=new A.eS(null,null,null,null)
-B.Rv=new A.eS(1/0,1/0,null,null)
+B.Rt=new A.eS(null,null,null,null)
+B.Ru=new A.eS(1/0,1/0,null,null)
+B.X9=new A.cw("The Thank You Token App stores tokens in your own Google Drive. This way, you can access your tokens from any device, while keeping them private. The app only has access to the folder it creates in your Drive. You can revoke access at any time in your Google Account settings.\n\nDue to the way Google handles authorisation, you have to give the app access to your Drive every time you use the app.",null,null,null,null,null,null,null,null)
+B.Rv=new A.eS(400,null,B.X9,null)
 B.Rx=new A.Tl(0,"tapAndSlide")
 B.Ry=new A.Tl(2,"slideOnly")
 B.Rz=new A.xa(null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null)

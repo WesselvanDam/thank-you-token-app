@@ -74,7 +74,7 @@ class NotAuthorisedPrompt extends ConsumerWidget {
               'This way, you can access your tokens from any device, while keeping '
               'them private. The app only has access to the folder it creates in '
               'your Drive. You can revoke access at any time in your Google Account settings.'
-              '\nDue to the way Google handles authorisation, you have to give the app '
+              '\n\nDue to the way Google handles authorisation, you have to give the app '
               'access to your Drive every time you use the app.'
             ),
           ),

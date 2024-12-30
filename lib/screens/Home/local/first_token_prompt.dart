@@ -84,7 +84,7 @@ class _FirstTokenPromptState extends ConsumerState<FirstTokenPrompt> {
           child: Text(
             'A token is stored as a single image, which you can pick from your gallery. '
             'After selecting and cropping the image, it gets added to your collection. '
-            'Next, you can write down the story behind the token: who gave it to you, '
+            '\n\nNext, you can write down the story behind the token: who gave it to you, '
             'when, and why. Once you have given the token away again, you can add the '
             'story behind that exchange as well.',
           ),
